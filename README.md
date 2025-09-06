@@ -1,7 +1,6 @@
-# Math-Routing-Agent-
-An AI-powered Agentic-RAG system that provides step-by-step math solutions. Uses a knowledge base with MCP fallback, FastAPI backend, React frontend, feedback learning, and guardrails for accuracy, safety, and continuous improvement.
+# 🧮 Math Routing Agent – Human-in-the-Loop AI Tutor
 
-
+## Overview
 The **Math Routing Agent** is an AI-powered tutor designed to replicate a math professor.  
 It provides **step-by-step solutions** to mathematical problems using a **Knowledge Base (KB)** first approach, and falls back to **web/MCP search** when needed.  
 With **human-in-the-loop feedback**, the system continuously learns and improves over time.
@@ -146,19 +145,10 @@ Response:
 ## 📌 Author
 
 **Raju Sabhavath**
-🔗 [LinkedIn]([https://linkedin.com/](https://www.linkedin.com/posts/raju-sabhavath-0bb4a9224_tech-check-ai-activity-7370142520158162944-NA1d?utm_source=share&utm_medium=member_desktop&rcm=ACoAADhQV08BrzzrwRes98h9guo0ES95h49d8qk)) | 
+🔗 [LinkedIn](https://linkedin.com/) | [GitHub](https://github.com/)
 
-[GitHub](https://github.com/)
+----
 
----
-
-## 📜 License
-
-MIT License – free to use and modify.
-
-```
-
----
 
 ⚡ Question: Do you want me to make a **shorter `README.md` summary version** for GitHub repo landing page (1–2 sections only), or keep this **full detailed professional one**?
 ```
