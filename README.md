@@ -1,23 +1,24 @@
-# 🧮 Math Routing Agent – Human-in-the-Loop AI Tutor
+Sure! Here's a professional **README.md** file tailored for your **Math Routing Agent** project:
 
-## Overview
-The **Math Routing Agent** is an AI-powered tutor designed to replicate a math professor.  
-It provides **step-by-step solutions** to mathematical problems using a **Knowledge Base (KB)** first approach, and falls back to **web/MCP search** when needed.  
-With **human-in-the-loop feedback**, the system continuously learns and improves over time.
+```markdown
+# Math Routing Agent – Human-in-the-Loop Feedback Learning
 
----
-
-## ✨ Features
-- 📘 **Knowledge Base First** → Solves questions from stored data.
-- 🌐 **Web/MCP Search Fallback** → Retrieves answers when KB lacks a solution.
-- 🔄 **Feedback Loop** → Human-in-the-loop rating & validation improves accuracy.
-- 🛡 **Guardrails** → Input/output validation for safety & clarity.
-- 📊 **Benchmarking Ready** → JEE Math dataset integration (optional).
-- 🎨 **React Frontend** → Interactive UI for solving and feedback.
+## Project Overview
+The **Math Routing Agent** is an Agentic-RAG system that replicates a mathematical professor. It provides step-by-step solutions for mathematical questions, leveraging a knowledge base, web search via MCP, and human-in-the-loop feedback for continuous improvement.
 
 ---
 
-## 🏗️ Architecture
+## Features
+- Step-by-step solutions for mathematical questions.
+- Knowledge Base first approach; routes to web/MCP if KB does not contain answer.
+- Human-in-the-loop feedback for learning and validation.
+- Input/Output guardrails for privacy and safety.
+- Optional benchmarking with JEE Math dataset.
+
+---
+
+## Architecture
+
 ```
 
 math-routing-agent/
@@ -26,62 +27,82 @@ math-routing-agent/
 │   ├── agents/                 # Agent logic
 │   │   ├── routing\_agent.py
 │   │   └── feedback\_agent.py
-│   ├── knowledge\_base/         # KB data & retriever
+│   ├── knowledge\_base/         # KB related
 │   │   ├── kb\_retriever.py
 │   │   └── data/math\_questions.json
 │   ├── search/                 # MCP/Web search
 │   │   └── mcp\_client.py
 │   ├── guardrails/             # Input/output validation
 │   │   └── io\_guardrails.py
-│   └── models/                 # Embedding & vector logic
+│   └── models/                 # Embeddings & vector logic
 │       └── embeddings.py
-├── frontend/                   # React UI
+├── benchmarks/                 # Optional JEE benchmarking
+│   ├── jee\_bench\_complete.py
+│   └── results/jee\_bench\_results.json
+├── frontend/                   # React frontend
 │   ├── src/
 │   │   ├── App.js
 │   │   └── components/MathSolver.js
-├── benchmarks/                 # Optional evaluation
-│   ├── jee\_bench\_complete.py
-│   └── results/
 ├── tests/                      # Unit tests
 ├── Dockerfile                  # Containerization
-├── requirements.txt            # Python deps
+├── requirements.txt
 └── README.md
 
 ````
 
 ---
 
-## ⚙️ Setup Instructions
+## Setup Instructions
 
-### Backend (FastAPI)
+### Backend
+1. Create virtual environment and activate:
 ```bash
-# Create virtual env
 python -m venv venv
-source venv/bin/activate   # Mac/Linux
-venv\Scripts\activate      # Windows
-
-# Install deps
-pip install -r requirements.txt
-
-# Run backend
-uvicorn app.main:app --reload --host 0.0.0.0 --port 8000
+venv\Scripts\activate    # Windows
+source venv/bin/activate # Mac/Linux
 ````
 
-### Frontend (React)
+2. Install dependencies:
+
+```bash
+pip install -r requirements.txt
+```
+
+3. Run FastAPI backend:
+
+```bash
+uvicorn app.main:app --reload --host 0.0.0.0 --port 8000
+```
+
+### Frontend
+
+1. Navigate to frontend directory:
 
 ```bash
 cd frontend
+```
+
+2. Install dependencies:
+
+```bash
 npm install
+```
+
+3. Run React app:
+
+```bash
 npm start
 ```
 
 ---
 
-## 🔌 API Endpoints
+## API Endpoints
 
 ### Solve Math Question
 
-**POST** `/api/solve`
+* **URL:** `/api/solve`
+* **Method:** POST
+* **Body Example:**
 
 ```json
 {
@@ -89,11 +110,11 @@ npm start
 }
 ```
 
-Response:
+* **Response Example:**
 
 ```json
 {
-  "solution": "Step 1: Subtract 5 → 2x = 10\nStep 2: Divide by 2 → x = 5",
+  "solution": "Step 1: Subtract 5 from both sides\n2x = 10\nStep 2: Divide by 2\nx = 5",
   "source": "knowledge_base",
   "confidence": 1.0
 }
@@ -101,54 +122,73 @@ Response:
 
 ### Submit Feedback
 
-**POST** `/api/feedback`
+* **URL:** `/api/feedback`
+* **Method:** POST
+* **Body Example:**
 
 ```json
 {
   "question": "Solve for x: 2x + 5 = 15",
   "answer": "x = 5",
   "rating": 5,
-  "comments": "Clear explanation"
+  "comments": "Clear steps"
+}
+```
+
+* **Response Example:**
+
+```json
+{
+  "status": "success",
+  "message": "Thank you for your feedback!",
+  "feedback_id": 1
 }
 ```
 
 ---
 
-## 🛠️ Tech Stack
+## Example Workflow
 
-* **Backend:** FastAPI, Python 3.10+
+1. User enters a question in the frontend.
+2. Question is validated by input guardrails.
+3. Routing agent checks KB:
+
+   * If found → returns solution.
+   * If not → routes to MCP/Web search.
+4. Output guardrails validate response.
+5. User can submit feedback to improve agent.
+
+---
+
+## Tools & Frameworks
+
+* **Backend:** FastAPI
 * **Frontend:** React.js
-* **Agent Logic:** LangChain, CrewAI, Autogen
-* **Vector DB:** Qdrant / Weaviate
-* **Search APIs:** MCP, Tavily, Exa
+* **Agent Frameworks:** LangGraph, LLamaIndex, Autogen, CrewAI
+* **Vector DB:** Qdrant, Weaviate
+* **Search:** Tavily, Exa, Serper
 * **Feedback:** DSPy
-* **Deployment:** Docker
+* **Containerization:** Docker
 
 ---
 
-## 📊 Benchmarking (Optional)
+## Benchmarking (Optional)
 
-* Run: `python benchmarks/jee_bench_complete.py`
-* Results stored in: `benchmarks/results/jee_bench_results.json`
-
----
-
-## 🚀 Demo Workflow
-
-1. Enter a math problem in frontend.
-2. Backend routes → KB first, else Web/MCP.
-3. Step-by-step solution generated.
-4. User submits feedback → system learns.
+* JEE Math dataset benchmarking available in `benchmarks/jee_bench_complete.py`.
+* Results stored in `benchmarks/results/jee_bench_results.json`.
 
 ---
 
-## 📌 Author
+## Demo
 
-**Raju Sabhavath**
-🔗 [LinkedIn](https://linkedin.com/) | [GitHub](https://github.com/)
+* Run backend and frontend.
+* Solve math questions and observe KB hits vs MCP hits.
+* Submit feedback to test human-in-the-loop feature.
 
-----
+---
 
+## Author
 
-⚡ Question: Do you want me to make a **shorter `README.md` summary version** for GitHub repo landing page (1–2 sections only), or keep this **full detailed professional one**?
-```
+Raju Sabhavath
+
+---
